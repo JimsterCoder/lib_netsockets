@@ -39,6 +39,10 @@ add_executable(http_server examples/http_server.cc)
 add_executable(ftp_client examples/ftp_client.cc)
 add_executable(json_client examples/json_client.cc examples/json_message.hh examples/json_message.cc external/gason/src/gason.cpp)
 add_executable(json_server examples/json_server.cc examples/json_message.hh examples/json_message.cc external/gason/src/gason.cpp)
+add_executable(ftp_upload_append examples/ftp_upload_append.cc)
+find_package( CURL REQUIRED )
+target_link_libraries( ftp_upload_append CURL::libcurl )
+
 target_include_directories(json_server PRIVATE external/gason/src)
 
 set(lib_netsockets lib_netsockets)
@@ -52,6 +56,7 @@ target_link_libraries (http_server ${lib_netsockets} ${LIBS})
 target_link_libraries (ftp_client ${lib_netsockets} ${LIBS})
 target_link_libraries (json_client ${lib_netsockets} ${LIBS})
 target_link_libraries (json_server ${lib_netsockets} ${LIBS})
+
 
 #///////////////////////////////////////////////////////
 #SQLite server/client example (uses JSON, SQLite)
